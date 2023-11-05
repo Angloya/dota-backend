@@ -2,22 +2,26 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { apiPaths } from '../constants/api';
 import { ApiHeroesStats, HeroItemsApi } from './models/api';
-import { HeroesStats, HeroItems } from './models/heroes';
+import { HeroesStats, HeroItems, Heroes } from './models/heroes';
 import {
   getParsedHeroes,
   getParsedHeroesAllInfo,
   getParsedHeroItems,
+  getHeroesSettings,
 } from './helpers/parseHeroes';
 
 @Injectable()
 export class HeroesService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly httpService: HttpService) { }
 
-  async getHeroes(): Promise<HeroesStats[]> {
+  async getHeroes(): Promise<Heroes> {
     const data = await this.httpService.axiosRef.get<ApiHeroesStats[]>(
       `${apiPaths.dota}/heroStats`,
     );
-    return getParsedHeroes(data.data);
+    return {
+      settings: getHeroesSettings(data.data),
+      heroes: getParsedHeroes(data.data)
+    }
   }
 
   async getHero(id: number): Promise<HeroesStats> {

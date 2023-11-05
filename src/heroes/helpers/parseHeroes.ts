@@ -7,6 +7,8 @@ import {
   HeroItem,
   HeroItems,
   HeroItemsName,
+  HeroesSettings,
+  HeroComplexity
 } from '../models/heroes';
 
 export const getParsedHeroes = (herosList: ApiHeroesStats[]): HeroesStats[] => {
@@ -93,3 +95,29 @@ export const getParsedHeroItems = (apiItems: HeroItemsApi): HeroItems => {
 
   return items;
 };
+
+export const getHeroesSettings = (data: ApiHeroesStats[]): HeroesSettings => {
+  const heroes = getParsedHeroesAllInfo(data);
+  const roles = [];
+  const baseHealth = new Set<number>();
+  const turboPicks = new Set<number>();
+  const turboWins = new Set<number>();
+  const range = new Set<number>();
+  const moveSpeed = new Set<number>();
+
+  heroes.forEach((hero) => {
+    roles.push(...hero.roles)
+    range.add(hero.attackRange)
+    moveSpeed.add(hero.moveSpeed)
+  })
+
+  const heroesRoles = new Set(roles);
+  const sortSettings = (a: number, b: number) => a - b;
+
+  return {
+    range: Array.from(range).sort(sortSettings),
+    moveSpeed: Array.from(moveSpeed).sort(sortSettings),
+    complexity: [HeroComplexity.SIMPLE, HeroComplexity.MIDDLE, HeroComplexity.HARD],
+    roles: Array.from(heroesRoles),
+  }
+}

@@ -8,7 +8,7 @@ export interface HeroesStats {
   img: string;
   icon: string;
   heroId: number;
-  complexity: number;
+  complexity: HeroComplexity;
   similarHeroes: string[];
 }
 
@@ -49,7 +49,7 @@ export interface HeroesAllStats {
   heroId: number;
   turboPicks: number;
   turboWins: number;
-  complexity: number;
+  complexity: HeroComplexity;
   similarHeroes: string[];
 }
 
@@ -82,4 +82,22 @@ export enum HeroItemsName {
   'early_game_items' = 'earlyGameItems',
   'mid_game_items' = 'midGameItems',
   'late_game_items' = 'lateGameItems',
+}
+
+export enum HeroComplexity {
+  SIMPLE = 1,
+  MIDDLE = 2,
+  HARD = 3
+}
+
+export interface HeroesSettings {
+  range: number[];
+  moveSpeed: number[];
+  complexity: HeroComplexity[];
+  roles: string[];
+}
+
+export interface Heroes {
+  heroes: HeroesStats[];
+  settings: HeroesSettings
 }

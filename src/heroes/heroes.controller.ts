@@ -9,7 +9,7 @@ import { HeroesService } from './heroes.service';
 
 @Controller('heroes')
 export class HeroesController {
-  constructor(private readonly heroesService: HeroesService) {}
+  constructor(private readonly heroesService: HeroesService) { }
   @Get('all')
   getHeroes() {
     return this.heroesService.getHeroes();
@@ -26,7 +26,6 @@ export class HeroesController {
 
   @Get('items/:id')
   async getHeroItems(@Param() params: { id: string }) {
-    console.log('11');
     const items = await this.heroesService.getHeroItems(Number(params.id));
     if (items) {
       return items;
