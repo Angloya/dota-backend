@@ -8,6 +8,8 @@ export interface HeroesStats {
   img: string;
   icon: string;
   heroId: number;
+  complexity: number;
+  similarHeroes: string[];
 }
 
 export interface HeroesAllStats {
@@ -47,6 +49,8 @@ export interface HeroesAllStats {
   heroId: number;
   turboPicks: number;
   turboWins: number;
+  complexity: number;
+  similarHeroes: string[];
 }
 
 export interface HeroItem {

@@ -1,5 +1,6 @@
 import { ApiHeroesStats, HeroItemsApi } from '../models/api';
 import * as itemsData from '../constants/items.json';
+import * as heroesData from '../constants/npc_heroes.json';
 import {
   HeroesStats,
   HeroesAllStats,
@@ -9,60 +10,75 @@ import {
 } from '../models/heroes';
 
 export const getParsedHeroes = (herosList: ApiHeroesStats[]): HeroesStats[] => {
-  return herosList.map((hero) => ({
-    id: hero.id,
-    name: hero.name,
-    localizedName: hero.localized_name,
-    primaryAttr: hero.primary_attr,
-    attackType: hero.attack_type,
-    roles: hero.roles,
-    img: hero.img,
-    icon: hero.icon,
-    heroId: hero.hero_id,
-  }));
+  return herosList.map((hero) => {
+    const heroData = Object.values(heroesData).find(
+      (item) => item.HeroID === hero.id.toString(),
+    );
+    return {
+      id: hero.id,
+      name: hero.name,
+      localizedName: hero.localized_name,
+      primaryAttr: hero.primary_attr,
+      attackType: hero.attack_type,
+      roles: hero.roles,
+      img: hero.img,
+      icon: hero.icon,
+      heroId: hero.hero_id,
+      complexity: Number(heroData['Complexity']),
+      similarHeroes: heroData['SimilarHeroes'],
+    };
+  });
 };
 
 export const getParsedHeroesAllInfo = (
   herosList: ApiHeroesStats[],
 ): HeroesAllStats[] => {
-  return herosList.map((hero) => ({
-    id: hero.id,
-    name: hero.name,
-    localizedName: hero.localized_name,
-    primaryAttr: hero.primary_attr,
-    attackType: hero.attack_type,
-    roles: hero.roles,
-    img: hero.img,
-    icon: hero.icon,
-    heroId: hero.hero_id,
-    baseHealth: hero.base_health,
-    baseHealthRegen: hero.base_health_regen,
-    baseMana: hero.base_mana,
-    baseManaRegen: hero.base_mana_regen,
-    baseArmor: hero.base_armor,
-    baseMr: hero.base_mr,
-    baseAttackMin: hero.base_attack_min,
-    baseAttackMax: hero.base_attack_max,
-    baseStr: hero.base_str,
-    baseAgi: hero.base_agi,
-    baseInt: hero.base_int,
-    strGain: hero.str_gain,
-    agiGain: hero.agi_gain,
-    intGain: hero.int_gain,
-    attackRange: hero.attack_range,
-    projectileSpeed: hero.projectile_speed,
-    attackRate: hero.attack_rate,
-    baseAttackTime: hero.base_attack_time,
-    attackPoint: hero.attack_point,
-    moveSpeed: hero.move_speed,
-    turnRate: hero.turn_rate,
-    cmEnabled: hero.cm_enabled,
-    legs: hero.legs,
-    dayVision: hero.day_vision,
-    nightVision: hero.night_vision,
-    turboPicks: hero.turbo_picks,
-    turboWins: hero.turbo_wins,
-  }));
+  return herosList.map((hero) => {
+    const heroData = Object.values(heroesData).find(
+      (item) => item.HeroID === hero.id.toString(),
+    );
+
+    return {
+      id: hero.id,
+      name: hero.name,
+      localizedName: hero.localized_name,
+      primaryAttr: hero.primary_attr,
+      attackType: hero.attack_type,
+      roles: hero.roles,
+      img: hero.img,
+      icon: hero.icon,
+      heroId: hero.hero_id,
+      baseHealth: hero.base_health,
+      baseHealthRegen: hero.base_health_regen,
+      baseMana: hero.base_mana,
+      baseManaRegen: hero.base_mana_regen,
+      baseArmor: hero.base_armor,
+      baseMr: hero.base_mr,
+      baseAttackMin: hero.base_attack_min,
+      baseAttackMax: hero.base_attack_max,
+      baseStr: hero.base_str,
+      baseAgi: hero.base_agi,
+      baseInt: hero.base_int,
+      strGain: hero.str_gain,
+      agiGain: hero.agi_gain,
+      intGain: hero.int_gain,
+      attackRange: hero.attack_range,
+      projectileSpeed: hero.projectile_speed,
+      attackRate: hero.attack_rate,
+      baseAttackTime: hero.base_attack_time,
+      attackPoint: hero.attack_point,
+      moveSpeed: hero.move_speed,
+      turnRate: hero.turn_rate,
+      cmEnabled: hero.cm_enabled,
+      legs: hero.legs,
+      dayVision: hero.day_vision,
+      nightVision: hero.night_vision,
+      turboPicks: hero.turbo_picks,
+      turboWins: hero.turbo_wins,
+      complexity: Number(heroData['Complexity']),
+      similarHeroes: heroData['SimilarHeroes'],
+    };
+  });
 };
 
 export const getParsedHeroItems = (apiItems: HeroItemsApi): HeroItems => {
