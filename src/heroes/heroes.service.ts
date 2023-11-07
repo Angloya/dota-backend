@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { apiPaths } from '../constants/api';
 import { ApiHeroesStats, HeroItemsApi } from './models/api';
-import { HeroesStats, HeroItems, Heroes } from './models/heroes';
+import { HeroesAllStats, HeroItems, Heroes } from './models/heroes';
 import {
   getParsedHeroes,
   getParsedHeroesAllInfo,
@@ -24,7 +24,7 @@ export class HeroesService {
     }
   }
 
-  async getHero(id: number): Promise<HeroesStats> {
+  async getHero(id: number): Promise<HeroesAllStats> {
     const data = await this.httpService.axiosRef.get<ApiHeroesStats[]>(
       `${apiPaths.dota}/heroStats`,
     );

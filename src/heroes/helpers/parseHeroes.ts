@@ -28,6 +28,8 @@ export const getParsedHeroes = (herosList: ApiHeroesStats[]): HeroesStats[] => {
       heroId: hero.hero_id,
       complexity: Number(heroData['Complexity']),
       similarHeroes: heroData['SimilarHeroes'],
+      range: hero.attack_range,
+      moveSpeed: hero.move_speed,
     };
   });
 };
@@ -99,9 +101,6 @@ export const getParsedHeroItems = (apiItems: HeroItemsApi): HeroItems => {
 export const getHeroesSettings = (data: ApiHeroesStats[]): HeroesSettings => {
   const heroes = getParsedHeroesAllInfo(data);
   const roles = [];
-  const baseHealth = new Set<number>();
-  const turboPicks = new Set<number>();
-  const turboWins = new Set<number>();
   const range = new Set<number>();
   const moveSpeed = new Set<number>();
 

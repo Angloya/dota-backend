@@ -10,6 +10,8 @@ export interface HeroesStats {
   heroId: number;
   complexity: HeroComplexity;
   similarHeroes: string[];
+  range: number;
+  moveSpeed: number;
 }
 
 export interface HeroesAllStats {
