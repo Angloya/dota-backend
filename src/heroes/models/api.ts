@@ -66,3 +66,35 @@ export interface HeroItemsApi {
   mid_game_items: HeroItemApi;
   late_game_items: HeroItemApi;
 }
+
+export interface HeroTalent {
+  name: string;
+  level: number;
+}
+
+export interface HeroAbility {
+  abilities: string[]
+  talents: HeroTalent[]
+}
+
+export interface HeroAbilities {
+  [key: string]: HeroAbility[]
+}
+
+export interface AbilitiesAttrib {
+  key: string
+  header?: string
+  value: string
+  generated?: boolean
+}
+
+export interface ApiHeroAbilities {
+  dname: string
+  behavior: string
+  dmg_type: string
+  bkbpierce: string
+  desc: string
+  attrib: AbilitiesAttrib[]
+  lore: string
+  img: string
+}

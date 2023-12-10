@@ -1,6 +1,8 @@
-import { ApiHeroesStats, HeroItemsApi } from '../models/api';
+import { ApiHeroesStats, HeroItemsApi, HeroAbility, ApiHeroAbilities } from '../models/api';
 import * as itemsData from '../constants/items.json';
 import * as heroesData from '../constants/npc_heroes.json';
+import * as heroesAbilities from '../constants/hero_abilities.json';
+import * as abilitiesList from '../constants/abilities.json';
 import {
   HeroesStats,
   HeroesAllStats,
@@ -8,7 +10,8 @@ import {
   HeroItems,
   HeroItemsName,
   HeroesSettings,
-  HeroComplexity
+  HeroComplexity,
+  HeroAbilities
 } from '../models/heroes';
 
 export const getParsedHeroes = (herosList: ApiHeroesStats[]): HeroesStats[] => {
@@ -42,7 +45,24 @@ export const getParsedHeroesAllInfo = (
       (item) => item.HeroID === hero.id.toString(),
     );
 
+    const heroesAbilitiesKeys = Object.keys(heroesAbilities);
+    const heroesAbilitiesKey = heroesAbilitiesKeys.find((key) => hero.name === key)
+    const { abilities, talents } = heroesAbilities[heroesAbilitiesKey] as HeroAbility
+    const listAbilities = abilities.map((name) => {
+      const abilityKey = Object.keys(abilitiesList).find((key) => key === name)
+      return abilitiesList[abilityKey]
+    });
+
+    const listTalents = talents.map((item) => {
+      return {
+        level: item.level,
+        name: getParsedTalent(abilitiesList[item.name])
+      }
+    });
+
     return {
+      abilities: getParsedHeroAbilities(listAbilities),
+      talents: listTalents,
       id: hero.id,
       name: hero.name,
       localizedName: hero.localized_name,
@@ -120,3 +140,21 @@ export const getHeroesSettings = (data: ApiHeroesStats[]): HeroesSettings => {
     roles: Array.from(heroesRoles),
   }
 }
+
+
+export const getParsedHeroAbilities = (apiAbilities: ApiHeroAbilities[]): HeroAbilities[] => {
+  return apiAbilities.map(getParsedTalent)
+};
+
+export const getParsedTalent = (apiItem: ApiHeroAbilities): HeroAbilities => {
+  return {
+    dname: apiItem.dname,
+    behavior: apiItem.behavior,
+    dmgType: apiItem.dmg_type,
+    bkbpierce: apiItem.bkbpierce,
+    desc: apiItem.desc,
+    attrib: apiItem.attrib,
+    lore: apiItem.lore,
+    img: apiItem.img
+  }
+};

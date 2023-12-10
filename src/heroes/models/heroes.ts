@@ -1,3 +1,5 @@
+import { AbilitiesAttrib } from './api'
+
 export interface HeroesStats {
   id: number;
   name: string;
@@ -102,4 +104,15 @@ export interface HeroesSettings {
 export interface Heroes {
   heroes: HeroesStats[];
   settings: HeroesSettings
+}
+
+export interface HeroAbilities {
+  dname: string
+  behavior: string
+  dmgType: string
+  bkbpierce: string
+  desc: string
+  attrib: AbilitiesAttrib[]
+  lore: string
+  img: string
 }
