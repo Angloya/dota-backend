@@ -16,47 +16,6 @@ export interface HeroesStats {
   moveSpeed: number;
 }
 
-export interface HeroesAllStats {
-  id: number;
-  name: string;
-  localizedName: string;
-  primaryAttr: string;
-  attackType: string;
-  roles: string[];
-  img: string;
-  icon: string;
-  baseHealth: number;
-  baseHealthRegen: number;
-  baseMana: number;
-  baseManaRegen: number;
-  baseArmor: number;
-  baseMr: number;
-  baseAttackMin: number;
-  baseAttackMax: number;
-  baseStr: number;
-  baseAgi: number;
-  baseInt: number;
-  strGain: number;
-  agiGain: number;
-  intGain: number;
-  attackRange: number;
-  projectileSpeed: number;
-  attackRate: number;
-  baseAttackTime: number;
-  attackPoint: number;
-  moveSpeed: number;
-  turnRate: number;
-  cmEnabled: boolean;
-  legs: number;
-  dayVision: number;
-  nightVision: number;
-  heroId: number;
-  turboPicks: number;
-  turboWins: number;
-  complexity: HeroComplexity;
-  similarHeroes: string[];
-}
-
 export interface HeroItem {
   hint: string[];
   id: number;
@@ -115,4 +74,52 @@ export interface HeroAbilities {
   attrib: AbilitiesAttrib[]
   lore: string
   img: string
+}
+
+export interface HeroTalent {
+  level: number;
+  name: HeroAbilities
+}
+
+export interface HeroesAllStats {
+  abilities: HeroAbilities[];
+  talents: HeroTalent[];
+  id: number;
+  name: string;
+  localizedName: string;
+  primaryAttr: string;
+  attackType: string;
+  roles: string[];
+  img: string;
+  icon: string;
+  baseHealth: number;
+  baseHealthRegen: number;
+  baseMana: number;
+  baseManaRegen: number;
+  baseArmor: number;
+  baseMr: number;
+  baseAttackMin: number;
+  baseAttackMax: number;
+  baseStr: number;
+  baseAgi: number;
+  baseInt: number;
+  strGain: number;
+  agiGain: number;
+  intGain: number;
+  attackRange: number;
+  projectileSpeed: number;
+  attackRate: number;
+  baseAttackTime: number;
+  attackPoint: number;
+  moveSpeed: number;
+  turnRate: number;
+  cmEnabled: boolean;
+  legs: number;
+  dayVision: number;
+  nightVision: number;
+  heroId: number;
+  turboPicks: number;
+  turboWins: number;
+  complexity: HeroComplexity;
+  similarHeroes: string[];
 }
