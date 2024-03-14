@@ -71,7 +71,7 @@ export const getParsedHeroesAllInfo = (
       roles: hero.roles,
       img: hero.img,
       icon: hero.icon,
-      heroId: hero.hero_id,
+      heroId: hero.id,
       baseHealth: hero.base_health,
       baseHealthRegen: hero.base_health_regen,
       baseMana: hero.base_mana,
